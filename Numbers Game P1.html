@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+</head>
+<body>
+    <h1>Welcome to the Number Guessing Game</h1>
+
+    <p>Click the button below to play the game.</p>
+    <button onclick="goToGame()">Go to Game</button>
+
+    <p>Click this button to go to the Hints and Methods Page to learn the rules of the game</p>
+    <button onclick="goToRulesAndMethods()">Rules & Methods</button>
+
+    <script>
+        // Page format
+        document.body.style.fontFamily = 'Verdana';
+        document.body.style.textAlign = 'center';
+        document.body.style.margin = '50px';
+        // Function to send you to the game
+        function goToGame() {
+            window.location.href = "Numbers Game.html";
+        }
+        // Function to send you to the Rules and Methods page
+        function goToRulesAndMethods() {
+                window.location.href = "Numbers Game P3.html"
+        }
+    </script>
+</body>
+</html>

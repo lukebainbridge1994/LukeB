@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numbers Game</title>
+</head>
+<body>
+    <h1>Numbers Game</h1>
+    <p>Guess the random number!</p>
+    <div>
+    <label for="txtUpperInput">Enter the upper limit:</label>
+    <input id="txtUpperInput" type="number" placeholder="Input your limit here" />
+    <input id="btnGenerate" type="button" value="Generate" onclick="generateRandomNumber()" />
+    <label for="guess">Enter your guess:</label>
+    <input id="guess" type="number" placeholder="Your guess" disabled />
+    <input id="btnGuess" type="button" value="Check Guess" onclick="checkGuess()" disabled />
+    <p id="result" style="font-size: 1.2em; margin-top: 20px;"></p>
+
+        <img id="face1" src="Neutral.jpg" width="75" height="75" />
+        <img id="face2" src="Neutral.jpg" width="75" height="75" />
+        <img id="face3" src="Neutral.jpg" width="75" height="75" />
+        <img id="face4" src="Neutral.jpg" width="75" height="75" />
+        <img id="face5" src="Neutral.jpg" width="75" height="75" />
+    </div>
+
+    <audio id="clappingSound">
+        <source src="audience-clapping-strongly.wav" type="audio/wav">
+    </audio>
+
+    <audio id="booingSound" >
+        <source src="Booing.mp3" type="audio/mpeg">
+    </audio>
+
+    <p>Click this button to go back to the Welcome Page</p>
+    <button onclick="goBackToWelcomePage()">Welcome Page</button>
+   
+    <p>Click this button to go to the Rules and Methods Page</p>
+    <button onclick="goToRulesAndMethods()">Rules & Methods</button>
+
+    <script>
+        // Page format
+        document.body.style.fontFamily = 'Verdana';
+        document.body.style.textAlign = 'center';
+        document.body.style.margin = '50px';
+        //Button to return to the Welcome Page
+        function goBackToWelcomePage() {
+            window.location.href = "Numbers Game P1.html"
+        }
+        //Button to go to the Rules and Methods page
+        function goToRulesAndMethods() {
+            window.location.href = "Numbers Game P3.html"
+        }
+        // Declaring the variables
+        let randomNumber;
+        let previousRandomNumber;
+        let attempts = 0;
+        const maxAttempts = 5;
+        // Function to generate a random number
+        function generateRandomNumber() {
+            const upperLimit = parseInt(document.getElementById('txtUpperInput').value); // Gets the upper limit from the player
+            // Upper limit Validation
+            if (isNaN(upperLimit) || upperLimit < 1) {
+                alert('Please enter a number greater than 1.');
+                return;
+            }
+            // Random number generated between 1 and the upper limit
+            do {
+                randomNumber = Math.floor(Math.random() * upperLimit) + 1;
+            } while (randomNumber === previousRandomNumber); // While statement to prevent the same random number twice
+            previousRandomNumber = randomNumber;
+        
+            // Display a message regarding the random number
+            document.getElementById('result').innerHTML = 'A new random number has been generated between 1 and ' + upperLimit + '.';
+            // Enable "guess" text box and button, disables "generate" text box and button after generating the random number
+            document.getElementById('guess').disabled = false;
+            document.getElementById('btnGuess').disabled = false;
+            document.getElementById('txtUpperInput').disabled = true;
+            document.getElementById('btnGenerate').disabled = true;
+            attempts = 0; 
+        }
+        // Function that checks the player's guess
+        function checkGuess() {
+            attempts++; // Increases the attemps counter
+            const userGuess = parseInt(document.getElementById('guess').value); // Gets the player's guess from the guess box
+            // Validates the player's guess
+            if (isNaN(userGuess) || userGuess < 1) {
+                document.getElementById('result').innerHTML = 'Please enter a valid number greater than 1.';
+            } else if (userGuess === randomNumber) {
+                document.getElementById('result').innerHTML = 'Correct, well done! It took you ' + attempts + ' attempts.';
+                GoodAttemptImageUpdate(); // Gets the happy face when correct
+                playClappingSound();  // Plays the clapping sound when correct
+                setTimeout(() => { resetGame(); }, 5000); // Refreshes the page after 5 seconds upon completion
+                disableInput(); // Disables the "guess" text box and button
+            } else if (attempts === maxAttempts) {
+                document.getElementById('result').innerHTML = 'Sorry, you have reached the maximum number of attempts. The correct number was ' + randomNumber + '.';
+                BadAttemptImageUpdate(); // Gets the sad face when all attempts are spent
+                playBooingSound(); // Plays the booing sound when all attempts are spent
+                disableInput(); // Disables the "Guess" text box and button
+                setTimeout(() => { resetGame(); }, 5000); // Refreshes the page after 5 seconds if all attempts are spent
+
+            } else if (userGuess < randomNumber) {
+                document.getElementById('result').innerHTML = 'Incorrect, Too low!';
+                BadAttemptImageUpdate(); //Gets the sad face
+            } else {
+                document.getElementById('result').innerHTML = 'Incorrect, Too high!';
+                BadAttemptImageUpdate(); // Gets the sad face
+            }
+        }
+        // Function that updates the neutral faces to sad faces
+        function BadAttemptImageUpdate() {
+            let PictureString
+            PictureString = "face" + attempts;
+            document.getElementById(PictureString).src = "Sad.jpg";
+        }
+        // Function that updates the neutral faces to happy faces
+        function GoodAttemptImageUpdate() {
+            let PictureString
+            PictureString = "face" + attempts;
+            document.getElementById(PictureString).src = "Happy.jpg";
+        }
+        // Function for the clapping sound
+        function playClappingSound() {
+            var clappingSound = document.getElementById('clappingSound');
+            clappingSound.play();
+        }
+        // Function for the booing sound
+        function playBooingSound() {
+            var booingSound = document.getElementById('booingSound');
+            booingSound.play();
+        }
+        // Function for the disableInput 
+        function disableInput() {
+            document.getElementById('guess').disabled = true
+            document.getElementById('btnGuess').disabled = true;
+            document.getElementById('btnGenerate').disabled = true;
+            document.getElementById('txtUpperInput').disabled = true;
+        }
+        // Function to reset the game back to the beggining
+        function resetGame() {
+            // Resets the textboxes and results message
+            document.getElementById('txtUpperInput').value = '';
+            document.getElementById('guess').value = '';
+            document.getElementById('result').innerHTML = '';
+            // Reset the images back to neutral
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById('face' + i).src = 'Neutral.jpg';
+            }
+            // re-enables the textboxes and buttons
+            document.getElementById('guess').disabled = true;
+            document.getElementById('btnGuess').disabled = true;
+            document.getElementById('txtUpperInput').disabled = false;
+            document.getElementById('btnGenerate').disabled = false;
+            // Reset attempts counter
+            attempts = 0;
+        }
+
+</script>
+</body>
+</html>

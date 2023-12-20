@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rules and Methods</title>
+</head>
+<body>
+    <h1>Rules and Methods</h1>
+    <p>The number you have to enter in the upper limit needs to be greater than 1 to begin. The number you choose can be any size however the larger the number, the more difficult the game will be as you only have 5 attempts to guess correctly.</p>
+    <p>To ensure victory immediately, select or type 1 into the upper limit and then press "Generate". Select or type 1 into the guess bar and press "Guess" to get the clapping sound with a smiley face. :)</p>
+
+    <p>Click the button below to go back to the game.</p>
+    <button onclick="goBackToGame()">Back to the Game</button>
+
+    <p>Click the button below to go back to the wlecome page.</p>
+    <button onclick="goBackToWelcomePage()">Welcome Page</button>
+
+
+    <p>Thanks for playing!</p>
+    <p>Created by Luke Bainbridge</p>
+
+    <script>
+
+        // Page Style
+        document.body.style.fontFamily = 'Verdana';
+        document.body.style.textAlign = 'center';
+        document.body.style.margin = '50px';
+
+        function goBackToWelcomePage() {
+            window.location.href = "Numbers Game P1.html"
+        }
+
+        function goBackToGame() {
+            window.location.href = "Numbers Game.html";
+        }
+    </script>
+</body>
+</html>
