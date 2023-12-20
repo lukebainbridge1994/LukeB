@@ -1,0 +1,25 @@
+<html>
+<head>
+    <title>Multiply</title>
+</head>
+<body>
+    <p>What is 5 times 3?</p>
+    <input id="txtAns" type="text"/><br />
+    <input id="btnAns" type="button" value="Submit" onclick="btnAns_onClick()" />
+    <p id="parComment"></p>
+</body>
+</html>
+
+<script>
+    function btnAns_onClick() {
+        if (txtAns.value == 15) {
+            document.bgColor = "green";
+            parComment.innerText = "Correct!";
+            document.getElementById("txtAns").disabled = true;
+            
+        } else {
+            document.bgColor = "red";
+            parComment.innerText = "Incorrect";
+        }
+    }
+</script>

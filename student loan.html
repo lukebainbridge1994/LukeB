@@ -1,0 +1,31 @@
+<html>
+  <head><title>Student Loan Repayment Calculator</title></head>
+  <body>
+    <center>
+      <b>Student Loan Repayment Calculator</b><br /><br />
+      <input id="txtIncome" type="text" />
+      <input id="btnCalc" type="button" value="Calculate" onclick="btnCalc_onClick()" /> 
+      <p id="parPayment"></p>
+      <p id="parMonthlyPayment"></p>
+      <p id="parMonthlyGross"></p>
+    </center>
+  </body>
+</html>
+
+<script>
+    function btnCalc_onClick(){
+        if (txtIncome.value > 25000) {
+            parPayment.innerText = "Yearly Repayment £" + ((txtIncome.value - 25000) * 0.09);
+            parMonthlyPayment.innerText = "Monthly Repayment £" + ((txtIncome.value - 25000) * 0.09 / 12);
+            parMonthlyGross.innerText = "Monthly (Gross) £" + (txtIncome.value / 12);
+            document.bgColor="red"
+
+
+        } else {
+            parMonthlyPayment.innerText = "";
+            parMonthlyGross.innerText = "";
+            parPayment.innerText = "£0.00";
+            document.bgColor="geen"
+        }
+    }
+</script>

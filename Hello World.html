@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>Hello World</title>
+</head>
+<body>
+    <p>The <b>Hello World</b> page.</p>
+
+    <input id="btnRed" type="button" value="Red" onclick="btnRed_OnClick()" onmouseover="btnRed_OnMouseOver()" onmouseout="btnRed_OnMouseOut()" />
+    <input id="btnBlue" type="button" value="Blue" onclick="btnBlue_OnClick()" onmouseover="btnBlue_OnMouseOver()" onmouseout="btnBlue_OnMouseOut()" />
+    <input id="btnMagenta" type="button" value="Magenta" onclick="btnMagenta_OnClick()" onmouseover="btnMagenta_OnMouseOver()" onmouseout="btnMagenta_OnMouseOut()" />
+    <input id="btnReset" type="button" value="Default" onclick="btnReset_OnClick()" />
+</body>
+    <center><img id="picFace" src="Face.jpg" /></center>
+    <input id="btnPuppy" type="button" value="Large" onclick="btnPuppy_OnClick()" />
+    <input id="btnPuppy2" type="button" value="Default" onclick="btnPuppy2_OnClick()" />
+</html>
+
+<script>
+
+    function btnRed_OnClick() { document.bgColor = "red"; }
+    function btnRed_OnMouseOver() { btnRed.value = "RED"; }
+    function btnRed_OnMouseOut() { btnRed.value = "Red"; }
+    function btnBlue_OnClick() { document.bgColor = "blue"; }
+    function btnBlue_OnMouseOver() { btnBlue.value = "BLUE"; }
+    function btnBlue_OnMouseOut() { btnBlue.value = "Blue"; }
+    function btnMagenta_OnClick() { document.bgColor = "magenta"; }
+    function btnMagenta_OnMouseOver() { btnMagenta.value = "MAGENTA"; }
+    function btnMagenta_OnMouseOut() { btnMagenta.value = "Magenta"; }
+    function btnReset_OnClick() { document.bgColor = "white"; }
+    function btnPuppy_OnClick() { document.title = "Freya (large image)"; picFace.src = "FaceLarge.jpg"; }
+    function btnPuppy2_OnClick() { document.title = "Freya (small image)"; picFace.src = "Face.jpg"; }
+</script>

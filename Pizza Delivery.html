@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <title>Pizza Delivery</title>
+</head>
+<body>
+    <p>
+        Distance:  <input type="text" id="txtDist" /><br />
+        Cost:      <input type="text" id="txtCost" /><br />    
+                   <input type="button" id="btnCalc" value="Calc" onclick="btnCalc_onClick()" />
+    </p>
+    <p id="parCharge"></p>
+    <p id="parTotal"></p>
+</body>
+</html>
+<script>
+    function btnCalc_onClick() {
+        var floatTemp = parseInt(txtCost.value);
+        if (txtDist.value <= 5) {
+            parCharge.innerText =
+                "Delivery Charge is £0.00";
+            parTotal.innerText = "Total: £" + floatTemp;
+        } else {
+            if (txtCost.value >= 10) {
+                floatTemp = floatTemp + 1.5;
+                parCharge.innerText = "Delivery Charge is £1.50";
+                parTotal.innerText = "Total: £" + floatTemp;
+            } else {
+                floatTemp = floatTemp + 3;
+                parCharge.innerText = "Delivery Charge is £3.00";
+                parTotal.innerText = "Total: £" + floatTemp;
+            }
+        }
+    }
+</script>
